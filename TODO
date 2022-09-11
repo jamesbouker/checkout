@@ -1,0 +1,17 @@
+#######################################################################
+EXPRESS EXPRESS EXPRESS EXPRESS EXPRESS EXPRESS EXPRESS EXPRESS EXPRESS
+#######################################################################
+- add to backend/backend/app.js express route bs...
+  - /products GET: List of products, can show them in store front!
+  - /checkout POST: [productName, quanity] - removes from products list...
+  - /restock GET: not sure what this does, it's in next video... Probably adds some hardcoded BS
+
+
+
+#####################################################################
+SCRAPI SCRAPI SCRAPI SCRAPI SCRAPI SCRAPI SCRAPI SCRAPI SCRAPI SCRAPI
+#####################################################################
+- Don't do this. See if assignment & video recording needs proof... If so do it!
+  - npm start in backend/checkout starts strapi
+    : then you can add products
+
