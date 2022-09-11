@@ -29,6 +29,7 @@ const EXAMPLE_CART = {
 
 export const CartContext = createContext({
   cart: { ...EXAMPLE_CART },
+  restock: () => {},
   addToCart: (productName) => {},
   removeFromCart: (productName) => {},
   checkout: () => {},
@@ -48,6 +49,24 @@ export function dollarAmountInCart(productName, cart, products) {
 export function CartContextProvider(props) {
   const [products, setProducts] = useState([...DUMMY_PRODUCTS]);
   const [cart, setCart] = useState({});
+
+  function restock() {
+    fetch("http://localhost:1337/api/products", { method: "GET" })
+      .then((response) => response.text())
+      .then((result) => JSON.parse(result))
+      .then((result) => {
+        return result.data.map((item) => item.attributes);
+      })
+      .then((items) => {
+        items.forEach((product) => {
+          let temp = [...products];
+          temp.find((p) => p.name === product.name).instock += product.instock;
+          setProducts(temp);
+        });
+        console.log(items);
+      })
+      .catch((error) => console.log("error", error));
+  }
 
   function addToCart(productName) {
     const index = products.findIndex((prod) => prod.name === productName);
@@ -102,6 +121,7 @@ export function CartContextProvider(props) {
 
   const value = {
     products,
+    restock,
     cart,
     addToCart,
     removeFromCart,
